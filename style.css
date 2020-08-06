@@ -10,4 +10,29 @@ font-weight: bolder;
   margin: auto auto;
 }
 
-#
+.question{
+  margin-top:20px;
+}
+
+.opp{
+  margin: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: rgb(157, 88, 221);
+  color: rgb(255, 255, 255);
+}
+
+.result{
+  font-weight: 600;
+  font-size: xx-large;
+  /* background-color: rgb(255, 153, 0); */
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 5px;
+  text-align: center;
+
+}
+
+.next{
+  float: right;
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,40 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- 
-    <link href="style.css" rel="stylesheet"></link>
+
+  <link href="style.css" rel="stylesheet">
+  </link>
 </head>
+
 <body>
   <nav class="navbar navbar-light bg-light">
- <div id=highscore class="nav" >Veiw highscore</div>
- <div id=timer class="nav justify-content-end">0</div>
+    <div id="highscore" class="nav">Veiw highscore</div>
+    <div id="timer" class="nav justify-content-end">0</div>
   </nav>
   <div id="quiz wrapper" class="wrapper">
-    <h2 id="question" class="text-center">
-      question one
+    <h2 id="question" class="text-center question">
+      question:
     </h2>
-      <ul class="list-group">
-      <li id="op1" class="btn btn-primary btn-lg" type="submit"> 1. answer one1</li>
-      <li id="op2" class="btn btn-primary btn-lg" type="submit"> 2. answer two1</li>
-      <li id="op3" class="btn btn-primary btn-lg" type="submit"> 3. answer three1</li>
-      <li id="op4" class="btn btn-primary btn-lg" type="submit"> 4. answer four1</li>
-      </ul>
-      <h2 id="result">true</h2>
+    <ul class="list-group">
+      <li id="op1" class="btn  btn-lg opp" type="submit"> 1. answer one1</li>
+      <li id="op2" class="btn  btn-lg opp" type="submit"> 2. answer two1</li>
+      <li id="op3" class="btn  btn-lg opp" type="submit"> 3. answer three1</li>
+      <li id="op4" class="btn  btn-lg opp" type="submit"> 4. answer four1</li>
+    </ul>
+    <div class="card result">
+      <div class="card-body">
+        answer
+      </div>
     </div>
+    
+    <button type="button" class="btn btn-primary btn-lg next">Next</button>
   </div>
- 
+  </div>
+
 
 
 
   <script src="script.js"></script>
 </body>
+
 </html>
