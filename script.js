@@ -1,11 +1,10 @@
-var op1 = document.getElementById('op1');
-var op2 = document.getElementById('op2');
-var op3 = document.getElementById('op3');
-var op4 = document.getElementById('op4');
+var op1 = document.getElementById('op1')
+var op2 = document.getElementById('op2')
+var op3 = document.getElementById('op3')
+var op4 = document.getElementById('op4')
+var ques = document.getElementById('question')
 
-var quiz_link = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple`
-
-var quizNumber = 0
+var quiz_link = `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple`
 
 console.log()
 // timer on Nav
@@ -20,8 +19,8 @@ var downloadTimer = setInterval(function () {
    timeleft -= 1;
 }, 1000);
 
-// quiz api https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple
-function getQuizs(quizNumber) {
+// quiz api https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple
+function getQuizs() {
 
    fetch(quiz_link)
       .then(r => r.json())
@@ -30,6 +29,7 @@ function getQuizs(quizNumber) {
          console.log(quizsArray)
          showQuiz(quizsArray)
       })
+
 }
 
 // randomize the answers
@@ -46,26 +46,37 @@ function shuffleArray(quizAnswers) {
 function showQuiz(quizsArray) {
    // get all answers in one array
    var quizAnswers = []
-   var worngAnswers = quizsArray[quizNumber].incorrect_answers
+   var worngAnswers = quizsArray[0].incorrect_answers
    quizAnswers = worngAnswers.map(
       function add(incorrect_answer) {
          return {
             answerBool: false,
             text: incorrect_answer
          }
-   })
-   var answer = { answerBool: true, text: quizsArray[quizNumber].correct_answer }
+      })
+   var answer = { answerBool: true, text: quizsArray[0].correct_answer }
    quizAnswers.push(answer)
-   
+
    shuffleArray(quizAnswers)
+   console.log(quizAnswers)
 
    // show in html
-   
-   console.log(quizAnswers)
+   ques.innerText = "Question : " + quizsArray[0].question
+   op1.innerText = "1. " + quizAnswers[0].text
+   op1.title = quizAnswers[0].answerBool
+
+   op2.innerText = "2. " + quizAnswers[1].text
+   op2.title = quizAnswers[1].answerBool
+
+   op3.innerText = "3. " + quizAnswers[2].text
+   op3.title = quizAnswers[2].answerBool
+
+   op4.innerText = "4. " + quizAnswers[3].text
+   op4.title = quizAnswers[3].answerBool
+
+
 }
-
-
-// add event listener to whole page
+// add event listener to w"hole page
 
 function eventListener() {
    document.addEventListener('click', ({ target }) => {
@@ -73,6 +84,19 @@ function eventListener() {
       // if timer
 
       if (target.id === "op1" || "op2" || "op3" || "op4") {
+
+         if (target.title === "true") {
+       
+            getQuizs()
+         
+
+         } else {
+
+            console.log("no")
+
+         }
+
+
 
       }
 
@@ -86,3 +110,4 @@ function eventListener() {
 
 
 getQuizs()
+eventListener()
