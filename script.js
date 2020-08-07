@@ -4,6 +4,8 @@ var op3 = document.getElementById('op3')
 var op4 = document.getElementById('op4')
 var ques = document.getElementById('question')
 
+var score = 0
+
 var quiz_link = `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple`
 
 console.log()
@@ -26,7 +28,7 @@ function getQuizs() {
       .then(r => r.json())
       .then((quizs) => {
          const quizsArray = quizs.results
-         console.log(quizsArray)
+         // console.log(quizsArray)
          showQuiz(quizsArray)
       })
 
@@ -56,9 +58,8 @@ function showQuiz(quizsArray) {
       })
    var answer = { answerBool: true, text: quizsArray[0].correct_answer }
    quizAnswers.push(answer)
-
+   // randomize the answers
    shuffleArray(quizAnswers)
-   console.log(quizAnswers)
 
    // show in html
    ques.innerText = "Question : " + quizsArray[0].question
@@ -74,10 +75,11 @@ function showQuiz(quizsArray) {
    op4.innerText = "4. " + quizAnswers[3].text
    op4.title = quizAnswers[3].answerBool
 
-
+   document.getElementById('score').innerText = "Your Score: " + score
 }
-// add event listener to w"hole page
 
+
+// add event listener to whole page
 function eventListener() {
    document.addEventListener('click', ({ target }) => {
 
@@ -86,22 +88,16 @@ function eventListener() {
       if (target.id === "op1" || "op2" || "op3" || "op4") {
 
          if (target.title === "true") {
-       
+            document.getElementById('bool').innerText = "True"
+            score = score + 1
+            // document.getElementById('score').innerText = "Your Score: " + score
             getQuizs()
-         
 
          } else {
-
-            console.log("no")
-
+            document.getElementById('bool').innerText = "False"
+            getQuizs()
          }
-
-
-
-      }
-
-
-
+      } 
    })
 }
 
