@@ -3,23 +3,12 @@ var op2 = document.getElementById('op2')
 var op3 = document.getElementById('op3')
 var op4 = document.getElementById('op4')
 var ques = document.getElementById('question')
-
+var quizNum = 0
 var score = 0
 
 var quiz_link = `https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple`
 
-console.log()
-// timer on Nav
-var timeleft = 60;
-var downloadTimer = setInterval(function () {
-   if (timeleft <= 0) {
-      clearInterval(downloadTimer);
-      document.getElementById("timer").innerHTML = "Finished";
-   } else {
-      document.getElementById("timer").innerHTML = timeleft;
-   }
-   timeleft -= 1;
-}, 1000);
+
 
 // quiz api https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple
 function getQuizs() {
@@ -31,7 +20,8 @@ function getQuizs() {
          // console.log(quizsArray)
          showQuiz(quizsArray)
       })
-
+   quizNum += 1
+  
 }
 
 // randomize the answers
@@ -62,7 +52,7 @@ function showQuiz(quizsArray) {
    shuffleArray(quizAnswers)
 
    // show in html
-   ques.innerText = "Question : " + quizsArray[0].question
+   ques.innerText = "Q."+quizNum +" : " + quizsArray[0].question
    op1.innerText = "1. " + quizAnswers[0].text
    op1.title = quizAnswers[0].answerBool
 
@@ -75,33 +65,36 @@ function showQuiz(quizsArray) {
    op4.innerText = "4. " + quizAnswers[3].text
    op4.title = quizAnswers[3].answerBool
 
-   document.getElementById('score').innerText = "Your Score: " + score
+   document.getElementById('score').innerText = "Your Score: " + score + "/" + (quizNum-1)
 }
 
 
 // add event listener to whole page
 function eventListener() {
-   document.addEventListener('click', ({ target }) => {
 
+
+   document.addEventListener('click', (e) => {
+      
       // if timer
 
-      if (target.id === "op1" || "op2" || "op3" || "op4") {
-
-         if (target.title === "true") {
-            document.getElementById('bool').innerText = "True"
+      if (e.target.id === "op1" || "op2" || "op3" || "op4") {
+         
+         if (e.target.title === "true") {
+            document.getElementById('bool').innerText = `Q.${quizNum} : Right`
             score = score + 1
-            // document.getElementById('score').innerText = "Your Score: " + score
+            document.getElementById('score').innerText = "Your Score: " + score + "/" + quizNum
             getQuizs()
+           
 
-         } else {
-            document.getElementById('bool').innerText = "False"
+         } else if (e.target.title === "false"){
+            document.getElementById('bool').innerText = `Q.${quizNum} : Worng`
             getQuizs()
+           
+
          }
       } 
    })
 }
-
-
 
 
 
